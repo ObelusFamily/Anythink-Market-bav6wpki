@@ -24,6 +24,7 @@ from app.models.schemas.items import (
 from app.resources import strings
 from app.services.items import check_item_exists, get_slug_for_item
 from app.services.event import send_event
+from app.services.dalle import generate_image
 
 router = APIRouter()
 
@@ -68,6 +69,10 @@ async def create_new_item(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=strings.ITEM_ALREADY_EXISTS,
         )
+
+    if not item_create.image:
+        item_create.image = generate_image(item_create.title)
+
     item = await items_repo.create_item(
         slug=slug,
         title=item_create.title,

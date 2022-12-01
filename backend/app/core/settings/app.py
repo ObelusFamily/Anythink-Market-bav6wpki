@@ -1,7 +1,9 @@
 import logging
 import sys
+import os
 from typing import Any, Dict, List, Tuple
 
+import openai
 from loguru import logger
 from pydantic import PostgresDsn, SecretStr
 
@@ -32,6 +34,8 @@ class AppSettings(BaseAppSettings):
 
     logging_level: int = logging.INFO
     loggers: Tuple[str, str] = ("uvicorn.asgi", "uvicorn.access")
+
+    openai.api_key = os.getenv("OPENAI_API_KEY")
 
     class Config:
         validate_assignment = True

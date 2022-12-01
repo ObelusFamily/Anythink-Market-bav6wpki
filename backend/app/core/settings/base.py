@@ -2,6 +2,7 @@ from enum import Enum
 
 from pydantic import BaseSettings
 
+from dotenv import load_dotenv
 
 class AppEnvTypes(Enum):
     prod: str = "prod"
@@ -14,3 +15,4 @@ class BaseAppSettings(BaseSettings):
 
     class Config:
         env_file = ".env"
+        load_dotenv(dotenv_path=env_file, override=True)
