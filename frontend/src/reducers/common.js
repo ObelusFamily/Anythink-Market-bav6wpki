@@ -40,7 +40,7 @@ const reducer = (state = defaultState, action) => {
       if (action.error === false) {
         const redirectUrl = `/item/${action.payload.item.slug}`;
         return { ...state, redirectTo: redirectUrl };
-      } 
+      }
 
       return state;
     case SETTINGS_SAVED:
