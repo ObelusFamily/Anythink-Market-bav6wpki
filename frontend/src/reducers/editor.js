@@ -26,7 +26,7 @@ const reducer = (state = {}, action) => {
       return {
         ...state,
         inProgress: null,
-        errors: action.error ? action.payload.errors : null,
+        errors: action.error ? action.payload.errors.map(item => item.msg) : null,
       };
     case ASYNC_START:
       if (action.subtype === ITEM_SUBMITTED) {
